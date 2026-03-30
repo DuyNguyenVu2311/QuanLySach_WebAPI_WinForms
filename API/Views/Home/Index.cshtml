@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "Payment Demo";
+}
+
+<section class="page-shell" data-payment-app>
+    <div class="hero-card">
+        <p class="eyebrow">Payment + Webhook Demo</p>
+        <h1>Thanh toán và nhận code webhook trả về</h1>
+        <p class="hero-text">
+            Demo này chỉ giữ lại flow chính: tạo yêu cầu thanh toán, nhận thông tin redirect,
+            sau đó mô phỏng webhook trả code kết quả về server.
+        </p>
+    </div>
+
+    <div class="content-grid">
+        <section class="panel">
+            <h2>Tạo thanh toán</h2>
+
+            <label class="field-label" for="orderCode">Mã đơn hàng</label>
+            <input id="orderCode" class="field-control" type="text" value="EPAY-1024" data-order-code />
+
+            <label class="field-label" for="amount">Số tiền</label>
+            <input id="amount" class="field-control" type="number" value="330000" min="1000" step="1000" data-amount />
+
+            <label class="field-label" for="provider">Cổng thanh toán</label>
+            <select id="provider" class="field-control" data-provider>
+                <option value="MoMo">MoMo</option>
+                <option value="VNPay">VNPay</option>
+            </select>
+
+            <div class="button-row">
+                <button type="button" class="primary-button" data-create-payment>Tạo thanh toán</button>
+            </div>
+
+            <div class="status-box" data-create-status>
+                Chưa tạo request thanh toán.
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Thông tin request</h2>
+            <div class="detail-list">
+                <div><span>Request ID</span><strong data-request-id>-</strong></div>
+                <div><span>Order Code</span><strong data-view-order>-</strong></div>
+                <div><span>Provider</span><strong data-view-provider>-</strong></div>
+                <div><span>Payment URL</span><strong data-payment-url>-</strong></div>
+            </div>
+
+            <div class="code-block">
+<pre data-request-json>{
+  "orderCode": "-",
+  "amount": 0,
+  "provider": "-"
+}</pre>
+            </div>
+        </section>
+    </div>
+
+    <div class="content-grid">
+        <section class="panel">
+            <h2>Webhook trả về</h2>
+            <p class="section-text">Sau khi có `requestId`, bạn có thể giả lập webhook trả code thành công hoặc thất bại.</p>
+
+            <div class="button-row">
+                <button type="button" class="primary-button" data-webhook-success disabled>Webhook success</button>
+                <button type="button" class="ghost-button" data-webhook-failed disabled>Webhook failed</button>
+            </div>
+
+            <div class="status-box" data-webhook-status>
+                Chưa nhận webhook.
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Code trả về từ server</h2>
+            <div class="code-block">
+<pre data-webhook-json>{
+  "status": "-",
+  "code": "-",
+  "message": "-"
+}</pre>
+            </div>
+        </section>
+    </div>
+</section>
